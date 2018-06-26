@@ -6,7 +6,7 @@
 #    By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:46:52 by dzonda       #+#   ##    ##    #+#        #
-#    Updated: 2018/06/26 01:56:41 by dzonda      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/06/26 01:35:26 by dzonda      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -29,11 +29,6 @@ INCS_PATH = ./includes/
 LIB_PATH = ./libft/
 
 SRCS_NAME =	\
-			ft_putchar.c \
-			ft_putstr_fd.c \
-			ft_strdel.c \
-			ft_strlen.c \
-			ft_strdup.c \
 			ft_select.c \
 			ft_select_config.c \
 			ft_term.c \

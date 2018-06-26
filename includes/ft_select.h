@@ -6,7 +6,7 @@
 /*   By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/03 08:02:19 by dzonda       #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/26 01:55:47 by dzonda      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/06/26 01:33:56 by dzonda      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,6 +14,7 @@
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
+# include "../libft/includes/libft.h"
 # include <unistd.h>
 # include <termios.h>
 # include <sys/ioctl.h>
@@ -90,16 +91,6 @@ typedef struct		s_select
 	t_lstsel		*lst;
 	t_select_map	map;
 }					t_select;
-
-/*
-**					Library
-*/
-
-char				*ft_strdup(const char *s1);
-size_t				ft_strlen(const char *s);
-void				ft_strdel(char **as);
-int					ft_putchar(int c);
-void				ft_putstr_fd(const char *s, int fd);
 
 /*
 **					ft_select.c
