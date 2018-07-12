@@ -6,7 +6,7 @@
 #    By: dzonda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/10 20:37:15 by dzonda            #+#    #+#              #
-#    Updated: 2018/06/03 06:26:34 by dzonda      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/12 13:17:07 by dzonda      ###    #+. /#+    ###.fr      #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,102 +14,109 @@
 
 NAME = libft.a
 
+MAKE = make
 CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -I./
+RM = rm -f
 
-CC_FLAGS = -Wall -Wextra -Werror
+SRCS_PATH = ./src/
+OBJS_PATH = ./obj/
+INCS_PATH = ./include/
 
-SRCS = ./srcs/
+SRCS_NAME =	\
+			ft_atoi.c \
+			ft_bzero.c \
+			ft_isalnum.c \
+			ft_isalpha.c \
+			ft_isascii.c \
+			ft_isblank.c \
+			ft_isdigit.c \
+			ft_islower.c \
+			ft_isprint.c \
+			ft_isspace.c \
+			ft_isupper.c \
+			ft_itoa.c \
+			ft_lstadd.c \
+			ft_lstdel.c \
+			ft_lstdelone.c \
+			ft_lstiter.c \
+			ft_lstmap.c \
+			ft_lstnew.c \
+			ft_memalloc.c \
+			ft_memccpy.c \
+			ft_memchr.c \
+			ft_memcmp.c \
+			ft_memcpy.c \
+			ft_memdel.c \
+			ft_memmove.c \
+			ft_memset.c \
+			ft_nbrlen.c \
+			ft_putchar.c \
+			ft_putchar_fd.c \
+			ft_putendl.c \
+			ft_putendl_fd.c \
+			ft_putnbr.c \
+			ft_putnbr_fd.c \
+			ft_putstr.c \
+			ft_putstr_fd.c \
+			ft_stradel.c \
+			ft_strcat.c \
+			ft_strchr.c \
+			ft_strclr.c \
+			ft_strcmp.c \
+			ft_strcpy.c \
+			ft_strdel.c \
+			ft_strdup.c \
+			ft_strequ.c \
+			ft_striter.c \
+			ft_striteri.c \
+			ft_strjoin.c \
+			ft_strlcat.c \
+			ft_strlen.c \
+			ft_strmap.c \
+			ft_strmapi.c \
+			ft_strncat.c \
+			ft_strncmp.c \
+			ft_strncpy.c \
+			ft_strnequ.c \
+			ft_strnew.c \
+			ft_strnstr.c \
+			ft_strrchr.c \
+			ft_strsplit.c \
+			ft_strstr.c \
+			ft_strsub.c \
+			ft_strtrim.c \
+			ft_tolower.c \
+			ft_toupper.c \
+			ft_wordcount.c \
+			ft_wordlen.c \
+			get_next_line.c
 
-INCLUDES = ./includes/
+OBJS_NAME = $(SRCS_NAME:.c=.o)
 
-FILES = $(SRCS)get_next_line.c \
-		$(SRCS)ft_atoi.c \
-		$(SRCS)ft_bzero.c \
-		$(SRCS)ft_isalnum.c \
-		$(SRCS)ft_isalpha.c \
-		$(SRCS)ft_isascii.c \
-		$(SRCS)ft_isblank.c \
-		$(SRCS)ft_isdigit.c \
-		$(SRCS)ft_islower.c \
-		$(SRCS)ft_isprint.c \
-		$(SRCS)ft_isspace.c \
-		$(SRCS)ft_isupper.c \
-		$(SRCS)ft_itoa.c \
-		$(SRCS)ft_lstadd.c \
-		$(SRCS)ft_lstdel.c \
-		$(SRCS)ft_lstdelone.c \
-		$(SRCS)ft_lstiter.c \
-		$(SRCS)ft_lstmap.c \
-		$(SRCS)ft_lstnew.c \
-		$(SRCS)ft_memalloc.c \
-		$(SRCS)ft_memccpy.c \
-		$(SRCS)ft_memchr.c \
-		$(SRCS)ft_memcmp.c \
-		$(SRCS)ft_memcpy.c \
-		$(SRCS)ft_memdel.c \
-		$(SRCS)ft_memmove.c \
-		$(SRCS)ft_memset.c \
-		$(SRCS)ft_nbrlen.c \
-		$(SRCS)ft_putchar.c \
-		$(SRCS)ft_putchar_fd.c \
-		$(SRCS)ft_putendl.c \
-		$(SRCS)ft_putendl_fd.c \
-		$(SRCS)ft_putnbr.c \
-		$(SRCS)ft_putnbr_fd.c \
-		$(SRCS)ft_putstr.c \
-		$(SRCS)ft_putstr_fd.c \
-		$(SRCS)ft_stradel.c \
-		$(SRCS)ft_strcat.c \
-		$(SRCS)ft_strchr.c \
-		$(SRCS)ft_strclr.c \
-		$(SRCS)ft_strcmp.c \
-		$(SRCS)ft_strcpy.c \
-		$(SRCS)ft_strdel.c \
-		$(SRCS)ft_strdup.c \
-		$(SRCS)ft_strequ.c \
-		$(SRCS)ft_striter.c \
-		$(SRCS)ft_striteri.c \
-		$(SRCS)ft_strjoin.c \
-		$(SRCS)ft_strlcat.c \
-		$(SRCS)ft_strlen.c \
-		$(SRCS)ft_strmap.c \
-		$(SRCS)ft_strmapi.c \
-		$(SRCS)ft_strncat.c \
-		$(SRCS)ft_strncmp.c \
-		$(SRCS)ft_strncpy.c \
-		$(SRCS)ft_strnequ.c \
-		$(SRCS)ft_strnew.c \
-		$(SRCS)ft_strnstr.c \
-		$(SRCS)ft_strrchr.c \
-		$(SRCS)ft_strsplit.c \
-		$(SRCS)ft_strstr.c \
-		$(SRCS)ft_strsub.c \
-		$(SRCS)ft_strtrim.c \
-		$(SRCS)ft_tolower.c \
-		$(SRCS)ft_toupper.c \
-		$(SRCS)ft_wordcount.c \
-		$(SRCS)ft_wordlen.c
-
-
-OBJS = $(FILES:.c=.o)
+SRCS = $(addprefix $(SRCS_PATH),$(SRCS_NAME))
+OBJS = $(addprefix $(OBJS_PATH),$(OBJS_NAME))
 
 all: $(NAME)
 
 $(NAME) : $(OBJS)
-	clear
 	@ar rcs $(NAME) $(OBJS)
 	@echo "\033[1;32m[ $(NAME) ] Compiled\033[0m"
 
-./%.o : ./%.c
-	@$(CC) $(CC_FLAGS) -I $(INCLUDES) -o $@ -c $<
-	@clear
+$(OBJS_PATH)%.o : $(SRCS_PATH)%.c
+	@mkdir $(OBJS_PATH) 2> /dev/null || true
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 	@echo "\033[1m[ $@ ] Compiled\033[0m"
+	@echo "\033[2A"
+	@echo "\033[K"
+	@echo "\033[2A"
 
 clean:
-	@/bin/rm -f $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	@$(RM) $(NAME)
 	@echo "\033[1;31m[ $(NAME) ] deleted\033[0m"
 
 re: fclean all
