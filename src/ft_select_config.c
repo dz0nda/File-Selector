@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_manage_select.c                               .::    .:/ .      .::   */
+/*   ft_select_config.c                               .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/05/04 01:12:02 by dzonda       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/12 13:07:59 by dzonda      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/19 04:56:49 by dzonda       #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/19 04:56:56 by dzonda      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,34 +34,33 @@ void				ft_select_save(t_select **select, int stat)
 		*select = save;
 }
 
-t_lstsel			*ft_select_get_lst(const char *argv[], int argc,
-		int idtarget)
+static t_lstsel		*ft_select_get_lst(const char *argv[])
 {
-	t_lstsel		*new;
 	int				i;
 	int				k;
+	t_lstsel		*lst;
 	t_stat			stat;
 
-	i = -1;
-	k = 0;
-	if ((argc > 4095) || (!(new = (t_lstsel *)malloc(sizeof(t_lstsel)))))
+	i = 0;
+	k = -1;
+	if (!(lst = (t_lstsel *)malloc(sizeof(t_lstsel))))
 		return (NULL);
 	while (argv[++i])
-		if (i != idtarget)
+	{
+		lst->lst[++k] = ft_strdup(argv[i]);
+		if (lstat(lst->lst[k], &stat) > -1)
 		{
-			new->lst[k] = ft_strdup(argv[i]);
-			if (lstat(new->lst[k], &stat) > -1)
-			{
-				((stat.st_mode & S_IXUSR) || (stat.st_mode & S_IXGRP) ||
-					(stat.st_mode & S_IXOTH)) ? new->ftype[k] = ISEXEC : 0;
-				(S_ISDIR(stat.st_mode)) ? new->ftype[k] = ISDIR : 0;
-			}
-			(new->ftype[k] != ISDIR && new->ftype[k] != ISEXEC) ?
-				new->ftype[k] = ISREG : 0;
-			new->state[k++] = CLEAR;
+			if ((stat.st_mode & S_IXUSR))
+				lst->ftype[k] = ISEXEC;
+			if (S_ISDIR(stat.st_mode))
+				lst->ftype[k] = ISDIR;
 		}
-	new->lst[k] = NULL;
-	return (new);
+		if (lst->ftype[k] != ISDIR && lst->ftype[k] != ISEXEC)
+			lst->ftype[k] = ISREG;
+		lst->state[k] = CLEAR;
+	}
+	lst->lst[++k] = NULL;
+	return (lst);
 }
 
 t_select			*ft_select_new(int argc, const char *argv[])
@@ -70,11 +69,13 @@ t_select			*ft_select_new(int argc, const char *argv[])
 
 	if (!(select = (t_select *)malloc(sizeof(t_select))))
 		return (NULL);
-	select->fd = 0;
 	select->id = 0;
 	select->live = argc - 1;
-	if (argc < 2 || !(select->lst = ft_select_get_lst(argv, argc, 0)))
+	if ((argc < 2 || argc > 4095) || !(select->lst = ft_select_get_lst(argv)))
+	{
+		free(select);
 		return (NULL);
+	}
 	select->map = ft_select_get_map(select);
 	return (select);
 }

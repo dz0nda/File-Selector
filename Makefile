@@ -6,7 +6,7 @@
 #    By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:46:52 by dzonda       #+#   ##    ##    #+#        #
-#    Updated: 2018/07/12 13:17:11 by dzonda      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/19 04:57:08 by dzonda      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,7 +17,7 @@ NAME = ft_select
 
 MAKE = make
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = #-Wall -Werror -Wextra
 CPPFLAGS = -I./
 LDLIBS = -lft -ltermcap
 LDFLAGS = -Llibft/
@@ -32,9 +32,11 @@ SRCS_NAME =	\
 			ft_select.c \
 			ft_select_config.c \
 			ft_term.c \
+			ft_map.c \
 			ft_signal.c \
 			ft_print.c \
-			ft_keys.c \
+			ft_key.c \
+			ft_key_move.c \
 			ft_keys_tools.c
 
 OBJS_NAME = $(SRCS_NAME:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 02:24:12 by dzonda       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/12 13:08:00 by dzonda      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/19 04:25:34 by dzonda      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@ static void			ft_handle_signal_tstp(int signo)
 	(void)signo;
 	ft_select_save(&select, 1);
 	signal(SIGTSTP, SIG_DFL);
-	ioctl(select->fd, TIOCSTI, "\x1A");
+	ioctl(STDIN_FILENO, TIOCSTI, "\x1A");
 	ft_disable_raw(select->termios);
 }
 
