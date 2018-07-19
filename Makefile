@@ -6,7 +6,7 @@
 #    By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:46:52 by dzonda       #+#   ##    ##    #+#        #
-#    Updated: 2018/07/19 04:59:04 by dzonda      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/19 05:56:20 by dzonda      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,7 +17,7 @@ NAME = ft_select
 
 MAKE = make
 CC = gcc
-CFLAGS = #-Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 CPPFLAGS = -I./
 LDLIBS = -lft -ltermcap
 LDFLAGS = -Llibft/
