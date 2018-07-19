@@ -6,7 +6,7 @@
 #    By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/02/01 13:46:52 by dzonda       #+#   ##    ##    #+#        #
-#    Updated: 2018/07/19 04:57:08 by dzonda      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/19 04:59:04 by dzonda      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -36,8 +36,7 @@ SRCS_NAME =	\
 			ft_signal.c \
 			ft_print.c \
 			ft_key.c \
-			ft_key_move.c \
-			ft_keys_tools.c
+			ft_key_move.c
 
 OBJS_NAME = $(SRCS_NAME:.c=.o)
 
