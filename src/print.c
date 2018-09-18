@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_print.c                                       .::    .:/ .      .::   */
+/*   print.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../include/ft_select.h"
+#include "ft_select.h"
 
 static int				ft_select_print_case(t_select *select, unsigned short k)
 {
@@ -34,49 +34,45 @@ static int				ft_select_print_case(t_select *select, unsigned short k)
 	return (1);
 }
 
-static unsigned short	ft_select_print_help(t_select *select)
+static unsigned short	ft_select_print_help(void)
 {
-	if (50 < select->map.screen_width)
-	{
-		ft_putendl_fd("\r ------------------------------------------------- ",
+	ft_putendl_fd("\r ------------------------------------------------- ",
 			STDIN_FILENO);
-		ft_putstr_fd(BOLD, STDIN_FILENO);
-		ft_putendl_fd("\r| Quit : [ ESC ]           Finish : [ ENTER ]     |",
+	ft_putstr_fd(BOLD, STDIN_FILENO);
+	ft_putendl_fd("\r| Quit : [ ESC ]           Finish : [ ENTER ]     |",
 			STDIN_FILENO);
-		ft_putendl_fd("\r| Select : [ SPACEBAR ]    Remove : [ BACKSPACE ] |",
+	ft_putendl_fd("\r| Select : [ SPACEBAR ]    Remove : [ BACKSPACE ] |",
 			STDIN_FILENO);
-		ft_putendl_fd("\r ------------------------------------------------- ",
+	ft_putendl_fd("\r ------------------------------------------------- ",
 			STDIN_FILENO);
-		ft_putstr_fd(END, STDIN_FILENO);
-		return (4);
-	}
-	return (0);
+	ft_putstr_fd(END, STDIN_FILENO);
+	return (10);
 }
 
 static unsigned short	ft_select_print_title(t_select *select)
 {
-	if (!(55 < select->map.screen_width))
-		return (0 + ft_select_print_help(select));
+	if (!(80 < select->map.screen_width && 10 < select->map.screen_height))
+		return (0);
 	ft_putstr_fd(BOLD, STDIN_FILENO);
 	ft_putstr_fd(BLUE, STDIN_FILENO);
 	ft_putendl_fd("\r  _____  __                   .__                 __   ",
-		STDIN_FILENO);
+			STDIN_FILENO);
 	ft_putendl_fd("\r_/ ____\\/  |_     ______ ____ |  |   ____   _____/  |_ ",
-		STDIN_FILENO);
+			STDIN_FILENO);
 	ft_putendl_fd(
 			"\r \\   __\\   __\\   /  ___// __ \\|  | _/ __ \\_/ ___\\   __\\",
-		STDIN_FILENO);
+			STDIN_FILENO);
 	ft_putendl_fd(
 			"\r |  |   |  |    \\ \\___ \\  ___/|  |_  ___/\\  \\___|  |   ",
-		STDIN_FILENO);
+			STDIN_FILENO);
 	ft_putchar_fd('\r', STDIN_FILENO);
 	ft_putendl_fd(" |__|   |__|____/____  >\\___  >____/\\___  >\\___  >__|   ",
-		STDIN_FILENO);
+			STDIN_FILENO);
 	ft_putchar_fd('\r', STDIN_FILENO);
 	ft_putendl_fd("          /_____/    \\/     \\/          \\/     \\/      ",
-		STDIN_FILENO);
+			STDIN_FILENO);
 	ft_putstr_fd(END, STDIN_FILENO);
-	return (6 + ft_select_print_help(select));
+	return (ft_select_print_help());
 }
 
 void					ft_select_print(t_select *select)

@@ -18,44 +18,45 @@ NAME = ft_select
 MAKE = make
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-CPPFLAGS = -I./
-LDLIBS = -lft -ltermcap
+CPPFLAGS = -I./include -I./libft/include
+LDLIBS = -ltermcap -lft
+
 LDFLAGS = -Llibft/
 RM = rm -f
 
-SRCS_PATH = ./src/
-OBJS_PATH = ./obj/
-INCS_PATH = ./include/
+SRC_PATH = ./src/
+OBJ_PATH = ./obj/
+INC_PATH = ./include/
 LIB_PATH = ./libft/
 
-SRCS_NAME =	\
-			ft_select.c \
-			ft_select_config.c \
-			ft_term.c \
-			ft_map.c \
-			ft_signal.c \
-			ft_print.c \
-			ft_key.c \
-			ft_key_move.c
+SRC_NAME =	\
+			select.c \
+			select_config.c \
+			term.c \
+			map.c \
+			signal.c \
+			print.c \
+			key.c \
+			key_move.c
 
-OBJS_NAME = $(SRCS_NAME:.c=.o)
+OBJ_NAME = $(SRC_NAME:.c=.o)
 
-SRCS = $(addprefix $(SRCS_PATH),$(SRCS_NAME))
-OBJS = $(addprefix $(OBJS_PATH),$(OBJS_NAME))
+SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 
 all: $(NAME)
 
-$(NAME): lib $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS) $(LDLIBS)
-	@echo "\033[1;32m[ $(NAME) ] Compiled\033[0m"
-
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
-	@mkdir $(OBJS_PATH) 2> /dev/null || true
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 	@echo "\033[1m[ $@ ] Compiled\033[0m"
 	@echo "\033[2A"
 	@echo "\033[K"
 	@echo "\033[2A"
+
+$(NAME): $(OBJS) $(lib)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)  $(OBJ) -o $(NAME) 
+	@echo "\033[1;32m[ $(NAME) ] Compiled\033[0m"
 
 lib:
 	@make -C $(LIB_PATH)

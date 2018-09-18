@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_key.c                                         .::    .:/ .      .::   */
+/*   key.c                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -11,7 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../include/ft_select.h"
+#include "ft_select.h"
 
 static t_key	ft_key_update_id_auto(t_select *select, unsigned int k,
 		char *lst[])
@@ -36,10 +36,8 @@ static t_key	ft_key_update_id_auto(t_select *select, unsigned int k,
 static t_key	ft_key_delete(t_select *select)
 {
 	int			i;
-	int			j;
 
 	i = select->id;
-	j = -1;
 	if (--(select->live) == 0)
 		return (KESC);
 	while (select->lst->lst[++i])

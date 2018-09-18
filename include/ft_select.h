@@ -14,7 +14,7 @@
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
-# include "../libft/include/libft.h"
+# include "libft.h"
 # include <unistd.h>
 # include <termios.h>
 # include <sys/ioctl.h>
