@@ -6,7 +6,7 @@
 /*   By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/26 09:48:02 by dzonda       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 04:43:42 by dzonda      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/07 08:56:02 by dzonda      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,7 +36,8 @@ int				ft_select(t_select *select)
 	while (key != KESC && key != KENT)
 	{
 		ft_tcaps_exec("ho");
-		ft_select_print(select);
+		if (select->map.screen_height > 2)
+			ft_select_print(select);
 		ft_tcaps_exec("cd");
 		read(STDIN_FILENO, buff, 3);
 		key = ft_key_get(buff, select);

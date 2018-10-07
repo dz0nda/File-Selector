@@ -6,7 +6,7 @@
 /*   By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/04/03 08:02:19 by dzonda       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 04:55:50 by dzonda      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/07 08:56:59 by dzonda      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
-# include "libft.h"
+# include "../libft/include/libft.h"
 # include <unistd.h>
 # include <termios.h>
 # include <sys/ioctl.h>

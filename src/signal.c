@@ -6,7 +6,7 @@
 /*   By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/06/06 02:24:12 by dzonda       #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 04:25:34 by dzonda      ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/10/07 08:56:57 by dzonda      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,8 @@ static void			ft_handle_signal_resize(int signo)
 		signal(SIGTSTP, ft_handle_signal_tstp);
 	}
 	select->map = ft_select_get_map(select);
-	ft_select_print(select);
+	if (select->map.screen_height > 2)
+		ft_select_print(select);
 }
 
 void				ft_handle_signal(void)

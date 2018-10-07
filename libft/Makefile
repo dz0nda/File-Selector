@@ -6,7 +6,7 @@
 #    By: dzonda <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/10 20:37:15 by dzonda            #+#    #+#              #
-#    Updated: 2018/07/12 13:18:43 by dzonda      ###    #+. /#+    ###.fr      #
+#    Updated: 2018/10/07 08:43:33 by dzonda      ###    #+. /#+    ###.fr      #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,8 @@ OBJS_NAME = $(SRCS_NAME:.c=.o)
 SRCS = $(addprefix $(SRCS_PATH),$(SRCS_NAME))
 OBJS = $(addprefix $(OBJS_PATH),$(OBJS_NAME))
 
+NB_FILES = $(words $(SRCS_NAME))
+
 all: $(NAME)
 
 $(NAME) : $(OBJS)
@@ -107,10 +109,19 @@ $(NAME) : $(OBJS)
 $(OBJS_PATH)%.o : $(SRCS_PATH)%.c
 	@mkdir $(OBJS_PATH) 2> /dev/null || true
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
-	@echo "\033[1m[ $@ ] Compiled\033[0m"
-	@echo "\033[2A"
-	@echo "\033[K"
-	@echo "\033[2A"
+
+	@$(eval CURSOR=$(shell echo $$(($(CURSOR) + 1))))
+	@$(eval PERCENT=$(shell echo $$(($(CURSOR) * 100 / $(NB_FILES)))))
+	@if [ $(CURSOR) != 1 ]; then\
+        (printf "\e[?25l" && printf "\033[1A");\
+    fi # hide cursor & move up except first time
+	@echo "\033[93m[ $(NAME) ] Compiling: \033[0m\033[1m[$(PERCENT)%] \033[0m$@                       "
+	@printf "\e[?25h" #show cursor
+
+#	@echo "\033[1m[ $@ ] Compiled\033[0m"
+#	@echo "\033[2A"
+#	@echo "\033[K"
+#	@echo "\033[2A"
 
 clean:
 	@$(RM) $(OBJS)

@@ -5,8 +5,8 @@
 #                                                  +:+:+   +:    +:  +:+:+     #
 #    By: dzonda <marvin@le-101.fr>                  +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
-#    Created: 2018/02/01 13:46:52 by dzonda       #+#   ##    ##    #+#        #
-#    Updated: 2018/07/19 05:56:20 by dzonda      ###    #+. /#+    ###.fr      #
+#    Created: 2017/11/24 18:33:54 by dzonda       #+#   ##    ##    #+#        #
+#    Updated: 2018/10/07 08:44:52 by dzonda      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -18,18 +18,17 @@ NAME = ft_select
 MAKE = make
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-CPPFLAGS = -I./include -I./libft/include
-LDLIBS = -ltermcap -lft
-
+CPPFLAGS = -I ./include/
+LDLIBS = -lft -ltermcap
 LDFLAGS = -Llibft/
 RM = rm -f
 
-SRC_PATH = ./src/
-OBJ_PATH = ./obj/
-INC_PATH = ./include/
+SRCS_PATH = ./src/
+OBJS_PATH = ./obj/
+INCS_PATH = ./include/
 LIB_PATH = ./libft/
 
-SRC_NAME =	\
+SRCS_NAME =	\
 			select.c \
 			select_config.c \
 			term.c \
@@ -39,24 +38,29 @@ SRC_NAME =	\
 			key.c \
 			key_move.c
 
-OBJ_NAME = $(SRC_NAME:.c=.o)
+OBJS_NAME = $(SRCS_NAME:.c=.o)
 
-SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
-OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
+SRCS = $(addprefix $(SRCS_PATH),$(SRCS_NAME))
+OBJS = $(addprefix $(OBJS_PATH),$(OBJS_NAME))
+
+NB_FILES = $(words $(SRCS_NAME))
 
 all: $(NAME)
 
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
-	@echo "\033[1m[ $@ ] Compiled\033[0m"
-	@echo "\033[2A"
-	@echo "\033[K"
-	@echo "\033[2A"
-
-$(NAME): $(OBJS) $(lib)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS)  $(OBJ) -o $(NAME) 
+$(NAME): lib $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS) $(LDLIBS)
 	@echo "\033[1;32m[ $(NAME) ] Compiled\033[0m"
+
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
+	@mkdir $(OBJS_PATH) 2> /dev/null || true
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+	@$(eval CURSOR=$(shell echo $$(($(CURSOR) + 1))))
+	@$(eval PERCENT=$(shell echo $$(($(CURSOR) * 100 / $(NB_FILES)))))
+	@if [ $(CURSOR) != 1 ]; then\
+		(printf "\e[?25l" && printf "\033[1A");\
+		fi # hide cursor & move up except first time
+	@echo "\033[93m[ $(NAME) ] Compiling: \033[0m\033[1m[$(PERCENT)%] \033[0m$@                       "
+	@printf "\e[?25h" #show cursor
 
 lib:
 	@make -C $(LIB_PATH)
@@ -68,6 +72,11 @@ clean:
 fclean: clean
 	@$(MAKE) -C $(LIB_PATH) fclean
 	@$(RM) $(NAME)
+	@rm -rf a.out
 	@echo "\033[1;31m[ $(NAME) ] deleted\033[0m"
+	@rm -rf obj
 
 re: fclean all
+
+
+
